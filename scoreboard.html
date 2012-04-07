@@ -31,7 +31,7 @@ window.addEventListener('message',function(event) {
 		if (data.status == 1) {
 		var halftime = '<div id="htHeader">'+data.htheadertext+'</div>';
 		halftime += '<div id="htclock">'+data.htminutes+'</div>';
-		halftime += '<div id="htAd"><img src="images/htAd1.jpg"></div>';
+		halftime += '<div id="adblock"><img id="htAd" src="images/htAd1.jpg"></div>';
 		var overlay = document.createElement("div");
   		overlay.setAttribute("id","overlay");
   		overlay.setAttribute("class","overlay");
@@ -43,6 +43,7 @@ window.addEventListener('message',function(event) {
 		break;
 	case 'htUpdate':
 		document.getElementById('htclock').innerHTML = data.htminutes;
+		document.getElementById('htAd').src = data.htad;
 		break;
 	};
 });

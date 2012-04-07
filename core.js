@@ -16,12 +16,12 @@ var htSecs=0;
 var htTime=15;
 var ads = ["type","current","max"];
 ads.label = new Array ("ban","ht");
-ads.current = new Array (1,1);
-ads.max = new Array (2,2);
-ads.url = new Array ("images/banAd1.jpg", "images/toAd1.jpg");
-var numAds=2;
-var adNum=1;
-var adURL="images/ad1.jpg";
+ads.current = new Array (1,1); 
+ads.max = new Array (2,2);  // Set this to the number of banner ads and halftime ads, respectively
+ads.url = new Array ("images/banAd1.jpg", "images/htAd1.jpg");  // This is "hardcoded" for now
+//var numAds=2;
+//var adNum=1;
+//var adURL="images/ad1.jpg";
 
 /*launchScoreboard();
 setInterval(tick,100); */
@@ -171,9 +171,12 @@ function halftime(type) {
 function htTick() {
 	htSecs = htSecs - 1000;
 	htTime = msToMins (htSecs);
-	console.log(htTime);
+	j = htSecs % 60000
+	console.log(htSecs + " " + j + " " + htTime + " " + ads.url[1] );
+    if (j == 0) {  adCycle(1);  }
 	scoreboard.postMessage({'type': 'htUpdate',
-				'htminutes': htTime},"*");
+				'htminutes': htTime,
+				'htad' : ads.url[1] },"*");
 	ht = setTimeout ("htTick()",1000);
 	if (htSecs < 0) { halftime(-1); }
 	return;
@@ -405,14 +408,7 @@ function adCycle(type) {
 	if (ads.current[type] > ads.max[type]) { ads.current[type] = 1; }
 	ads.url[type] = "images/" + ads.label[type] + "Ad" + ads.current[type] + ".jpg";
 	console.log (ads.url[type]);
-	//	return (adstr);
 }
-
-//function adCycle() {
-//	adNum = adNum + 1;
-//	if (adNum > numAds) { adNum = 1; }
-//	adURL = "images/ad" + adNum + ".jpg";
-//}
 
 window.onload=init();
 
