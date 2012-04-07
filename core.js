@@ -99,16 +99,10 @@ function resetGame(){
 
 function msToMins (ms){
 	x = Math.floor(ms/1000);
-	var ts = Math.floor(ms/100);
 	secs = x % 60;
 	x = Math.floor(x/60);
 	mins = x % 60;
-	if ((mins > 0) & (secs > 30)) { 
-		y = mins+":"+((secs<=9) ? "0" + secs: secs);
-	} else {
-		var ts = Math.floor(ms/100);
-		y = ":"+((secs<=9) ? "0" + secs: secs + "." + ts);
-	}
+	y = mins+":"+((secs<=9) ? "0" + secs: secs);
 	return (y);
 }
 
@@ -233,10 +227,12 @@ function updateJamNumber(x) {
 }
 
 function periodTimeAdjust(delta) {
-	if (clock_on) {
-	 clock.pabsolute = clock.pabsolute + (delta*1000);	 
+	if ((clock_on) && (clock.to <= 0)) {
+	 clock.pabsolute = clock.pabsolute + (delta*1000);
+	 console.log( clock_on + "-clock.pabsolute" + clock.pabsolute + "/" + clock.to);
 	} else {
 	 clock.period = Math.max(Math.min(1800000,(clock.period + (delta*1000))),0);
+	 console.log( clock_on + "-clock.period:" + clock.period + "/" + clock.to);
 	}
 	 updateClocks();
 }
