@@ -14,6 +14,11 @@ var bout=1;
 var htStatus=0;
 var htSecs=0;
 var htTime=15;
+var ads = ["type","current","max"];
+ads.label = new Array ("ban","ht");
+ads.current = new Array (1,1);
+ads.max = new Array (2,2);
+ads.url = new Array ("images/banAd1.jpg", "images/toAd1.jpg");
 var numAds=2;
 var adNum=1;
 var adURL="images/ad1.jpg";
@@ -217,7 +222,7 @@ function updateClocks() {
 		'pClock': pc,
 		'jClock': jc,
 		'jcLabel': jcLabel,
-		'ad': adURL,
+		'ad': ads.url[0],
 		'jamNumber': clock.jamNumber},"*");
 }
 
@@ -377,7 +382,7 @@ function startstop() {
 		guest.jam = 0;
 		updateScores();
 		document.cpanel.startButton.value="Stop Jam";
-		adCycle();
+		adCycle(0);
 		clock.jabsolute = now+clock.jam;
 		clock.gabsolute = now+clock.jam+clock.gap;
 		if (!(clock_on)) {		
@@ -395,11 +400,19 @@ function startstop() {
 	}
 }
 
-function adCycle() {
-	adNum = adNum + 1;
-	if (adNum > numAds) { adNum = 1; }
-	adURL = "images/ad" + adNum + ".jpg";
+function adCycle(type) {
+	ads.current[type] = ads.current[type] + 1;
+	if (ads.current[type] > ads.max[type]) { ads.current[type] = 1; }
+	ads.url[type] = "images/" + ads.label[type] + "Ad" + ads.current[type] + ".jpg";
+	console.log (ads.url[type]);
+	//	return (adstr);
 }
+
+//function adCycle() {
+//	adNum = adNum + 1;
+//	if (adNum > numAds) { adNum = 1; }
+//	adURL = "images/ad" + adNum + ".jpg";
+//}
 
 window.onload=init();
 
