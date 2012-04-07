@@ -233,11 +233,11 @@ function updateJamNumber(x) {
 }
 
 function periodTimeAdjust(delta) {
-//	if (clock_on) {
-//	 clock.pabsolute = clock.pabsolute + (delta*1000);	 
-//	} else {
+	if (clock_on) {
+	 clock.pabsolute = clock.pabsolute + (delta*1000);	 
+	} else {
 	 clock.period = Math.max(Math.min(1800000,(clock.period + (delta*1000))),0);
-//	}
+	}
 	 updateClocks();
 }
 
