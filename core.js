@@ -1,8 +1,8 @@
-var scoreboard;
-var miniboard;
-var console;
-var guestName;
-var homeName;
+var scoreboard;  // Holds pointer to the scoreboard window
+var miniboard; // Holds pointer to the (unimplemented) miniboard window
+var console; // Holds pointer to the control panel
+var guestName; // guest team name - replace with guest.Name
+var homeName; // Ditto
 var lasttick = (new Date).getTime();
 var t; //timer
 var ht; //halftime timer
