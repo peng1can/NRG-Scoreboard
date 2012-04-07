@@ -1,0 +1,25 @@
+div {
+  text-align: center;
+  background-color: #c0c0c0;
+  font-family: sans-serif;
+
+}
+
+span{
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.shortcut {
+  font-family: monospace;
+  float: left;
+  width: 100px;
+}
+
+.horiz{
+  border: 1px solid;
+  vertical-align: top;
+  display: inline-block;
+}
+
+

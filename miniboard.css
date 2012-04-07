@@ -1,0 +1,129 @@
+
+/* Set a few global defaults */
+span {text-align:center;}
+p {text-align:center;}
+
+
+/* The main backdrop for the scoreboard - Adjust for BG Color and any odd display sizes*/
+#master {
+  z-index:-1; 
+  width: 1010px; 
+  height: 750px; 
+  background-color: black; 
+  position: relative; 
+  visibility: visible;
+}
+
+
+/* Scoreframe is where the action takes place, headers and ads are above and below.
+   This is to let you move all the scoring components around at once. */
+#scoreboardFrame {
+  width: 1010px; 
+  position: absolute;
+  background-color: black;
+  top: 10px;
+  height: 740px;
+  /*border: 1px dotted yellow;*/ 
+  z-index: 1;
+}
+
+/* All the clocks in one place... */
+#allClocksFrame {
+   width: 800px; 
+   position: absolute;
+   top: 1px;
+   left: 120; 
+   font-size: 32px;
+   text-align: center;
+   font-family: sans-serif;  
+   background-color: #DC143C;
+   border: solid 2px #DC143C;
+}
+
+.clockHeaders {
+  font-family: sans-serif;
+  font-size: 32px;
+  text-align: center;
+  color: white;
+
+}
+
+.clockTimes {
+   background-color: black;
+   color: white;
+   font-size: 72px;
+   text-align: center;
+   font-family: Arial;
+   padding: 2px;
+   border: solid 2px #DC143C;
+}
+
+#periodTime {
+  font-size: 280px;
+}
+
+#jamTime {
+  font-size: 180px;
+  color: yellow;
+}
+
+/* And timeout counts are embedded in the clocks */
+#timeoutCount {
+   height: 25px;
+   border: 0px;
+}
+
+img.toHIcons {
+ float: left;
+}
+
+img.toGIcons {
+ float: right;
+}
+
+/* Box that contains the jam scores */
+#jamScoreFrame {
+  background-color: #DC143C; 
+  color:yellow; 
+  position: absolute; 
+  clear: left;
+  bottom: 1px;
+  height: 75px; 
+  width: 1010px;
+  font-family: sans-serif;  
+  margin: 0px;
+  font-size: 42px;
+  text-align: center;
+  border-width: 1px;
+  z-index: 0;
+}
+
+.jamScores {
+  display: inline-block;
+  background-color: black;
+  font-size: 46px;
+  color: yellow;
+  text-align: center;
+/*  padding-left: 18px;
+  padding-right: 18px;*/
+  width: 88px;
+}
+
+#jamScoreTitle {
+  background-color: #DC143C;
+  font-size: 48px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+#jamNumber {
+  background-color: #DC143C;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+

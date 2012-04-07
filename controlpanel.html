@@ -1,0 +1,164 @@
+<script type="text/javascript" src="shortcut.js">
+</script>
+<script type="text/javascript" src="core.js">
+</script>
+<HTML>
+<link rel="stylesheet" type="text/css" href="panel.css" />
+<title>Javascript Derby Scoreboard</title>  
+
+<form name="cpanel" id="cpanel">
+
+<div id="master" style="bgcolor: #c0c0c0; position: absolute; top: 0px;" >
+  <div style="border: 1px solid;">
+  <div>   
+     <b>PERIOD TIME</b></font>
+  </div>
+  <div>
+       <input type="button" value="+1m" onClick="periodTimeAdjust(60);" />
+       <input type="button" value="+10s" onClick="periodTimeAdjust(10);" />
+       <input type="button" value="+1s" onClick="periodTimeAdjust(1);" />
+       <input id="pClock" type="text" size="8" name="period" value="30:00" style="text-align:center; color:black;" disabled/>
+       <input type="button" value="-1s" onClick="periodTimeAdjust(-1);" />
+       <input type="button" value="-10s" onClick="periodTimeAdjust(-10);" />
+       <input type="button" value="-1m" onClick="periodTimeAdjust(-60);" />
+  </div>
+  </div>
+
+<div style="height:2px;"></div>
+
+<div style="font-weight:bold; overflow:hidden;">
+
+  <div class="horiz" style="width: 180px;">  
+  <div>
+       <b><div id="jClockLabel">JAM CLOCK</div></b>
+  </div> 
+  <div>
+       <input style="width: 70px;" type="button" id="startButton" onClick="startstop();" value="Start Jam" />
+       <input id="jClock" type="text" size="6" name="jam" value="2:00" 
+	style="text-align:center; color:black;" disabled />
+  </div>
+  </div>
+
+  <div class="horiz">  
+    <div><b>JAM #</b></div>
+    <div>
+    <input type="button" value=" - " onClick="updateJamNumber(-1)" />
+    <input type="text" size="2" id="jamNumber" value="00" style="text-align:center;" disabled />
+    <input type="button" value=" + " onClick="updateJamNumber(1)" />
+    </div>
+  </div>
+  
+</div>
+
+<div style="height:2px;"></div>
+
+ <div style="font-weight:bold; overflow:hidden;">
+
+  <div class="horiz">  
+  <div>HOME</div>
+  <div>
+     <input type="text" size="3" id="homeScore" value="0" style="text-align:center" 
+	onChange="setScore('home',this.value)"/>
+  </div>
+  <div>  
+       <input type="button" value=" + " onClick="changeScore('home',1);" />
+       <input type="text" size="2" id="homeJamScore" value="0" style="text-align:center" disabled/>
+       <input type="button" value=" - " onClick="changeScore('home',-1);" />
+  </div>
+  <div><span>  
+	   T: <input type="button" id="homeTimeouts" value="3" onClick="changeTimeouts('home','1');" />
+	   R: <input type="button" id="homeReviews" value="1" onClick="changeTimeouts('home','0');" />
+  </span></div>
+  </div>
+
+  <div class="horiz">
+  <div>
+        <b>PERIOD</b>
+  </div>
+  <div>  
+       <input type="button" id="periodNumber" value="1" onClick="togglePeriod();" />
+  </div>
+  <div>
+	<span style="width:160px"><input type="button" value="TimeOut" onClick="callTimeout(0);" />
+  </div>
+
+  </div>
+
+  <div class="horiz">
+  <div>GUEST</div>
+  <div>
+       <input type="text" size="3" id="guestScore" value="0" style="text-align:center" 
+                onChange="setScore('guest',this.value)"/>
+  </div>
+  <div>
+       <input type="button" value=" + " onClick="changeScore('guest',+1);" />
+       <input type="text" size="2" id="guestJamScore" value="0" style="text-align:center" disabled/>
+       <input type="button" value=" - " onClick="changeScore('guest',-1);" />
+  </div>
+  <div><span>
+	T: <input type="button" id="guestTimeouts" value="3" onClick="changeTimeouts('guest','1');" />
+	R: <input type="button" id="guestReviews" value="1" onClick="changeTimeouts('guest','0');" />
+  </span></div>
+  </div>
+
+  </div>
+  
+<div style="height:2px;"></div>
+
+  <div style="border: 1px solid;">
+       <input type="button" value="Pause Game" onClick="callTimeout(1);" />
+       <input type="button" value="Reset Clocks" onClick="resetClocks()" />
+       <input type="button" value="Reset Game" onClick="resetGame()" />
+  </div>
+
+<div style="height:2px;"></div>
+
+  <div style="border: 1px solid;">
+       <input type="button" value="Half Time" onClick="halftime(0);" />
+       <input type="button" value="Countdown" onClick="halftime(1);" />
+	<input type="text" size="2" id="htTime" value="15" style="text-align:center" /> Mins
+  </div>
+
+<div style="height:2px;"></div>
+
+<div style="font-weight:bold; overflow:hidden;">
+
+  <div class="horiz">  
+  <div>Home Label:</div>  
+  <div><input type="text" size="15" maxlength="15" id="homeTeam1" class="label" value="HOME" onchange="updateLabels()"/></div>
+  <div><input type="text" size="15" maxlength="15" id="homeTeam2" class="label" value="TEAM" onchange="updateLabels()"/></div>
+  </div>
+
+  <div class="horiz">  
+  <div>Guest Label:</div>  
+  <div><input type="text" size="15" maxlength="15" id="guestTeam1" class="label" value="GUEST" onchange="updateLabels(0)"/></div>
+  <div><input type="text" size="15" maxlength="15" id="guestTeam2" class="label" value="TEAM" onchange="updateLabels(0)"/>
+  </div>
+</div>
+
+<div>
+  <div>Enable Logos: <input type="checkbox" id="enableLogos" onClick="updateLabels(0)"></div>
+  <div>Next/Prev Bout: <input type="button" value=" < " onClick="updateLabels(-1);" />
+		       <input type="text" id="boutNum" size=1 value="1" style="text-align:center" />
+		       <input type="button" value=" > " onClick="updateLabels(1);" />
+  </div>
+</div>
+  <div>  
+	<input type="button" value="Launch Scoreboard Display" id="launch" onClick="launchScoreboard();"  />
+	<input type="button" value="Launch Clock Display" id="launch" onClick="launchMiniboard();"  DISABLED/>
+  </div>
+
+<div id="shortcuts" style="border: 1px solid;" >
+  <div><span class="shortcut">[ / ]</span><span>Adjust Period Time (Slow)</span></div>
+  <div><span class="shortcut">Ctrl + [ / ]</span><span>Add/Remove Period Time (Fast)</span></div>
+  <div><span class="shortcut">,</span><span>Add Home Points</span></div>
+  <div><span class="shortcut">.</span><span>AddGuest Points</span></div>
+  <div><span class="shortcut">Ctrl + , / .</span><span>Remove Points</span></div>
+  <div><span class="shortcut">p</span><span>Toggle Period #</span></div>
+  <div><span class="shortcut">Space</span><span>Start/Stop Jam</span></div>
+</div>
+
+</div>
+  </form>
+</body>
+</html>

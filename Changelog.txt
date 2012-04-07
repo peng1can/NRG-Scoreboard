@@ -1,0 +1,21 @@
+Next Up:
+- Lead jammer indication
+- Differentiate Pause Clock display
+- Maintain a game log
+
+0.99
+Fixed scoreboard timing to auto-adjust every 50ms.
+0.105
+Even more super-accurate timing
+0.106
+Added Reset Game button; laid groundwork for phasing out globals.
+Ability to adjust jam #.
+0.107
+Huge clean up to control panel layout
+0.108
+Ability to cycle through bout logos
+0.109
+Keyboard Shortcuts Supported (need to make the display toggleable)
+0.110
+Display Jam Clock Label in controlpanel
+

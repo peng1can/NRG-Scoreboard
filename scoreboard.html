@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<script language="JavaScript" type="text/javascript">
+
+window.addEventListener('message',function(event) {
+	var data = event.data	
+	switch (data.type) {
+	case 'label':
+		document.getElementById('homeName').innerHTML = data.homeName;
+		document.getElementById('guestName').innerHTML = data.guestName;
+		document.getElementById('periodHeader').innerHTML = "PERIOD "+data.period;
+		break;
+	case 'clock':
+		document.getElementById('pClock').innerHTML = data.pClock;
+		document.getElementById('jClock').innerHTML = data.jClock;
+		document.getElementById('jamNumber').innerHTML = data.jamNumber;
+		document.getElementById('jamHeader').innerHTML = data.jcLabel;
+		document.getElementById('ad').src = data.ad;
+		break;
+	case 'score':
+		document.getElementById('homeScore').innerHTML = data.home;
+		document.getElementById('guestScore').innerHTML = data.guest;
+		document.getElementById('homeJamScore').innerHTML = data.homeJam;
+		document.getElementById('guestJamScore').innerHTML = data.guestJam;
+		document.getElementById('guestTimeouts').innerHTML = data.guestTO;
+		document.getElementById('guestReviews').innerHTML = data.guestOR;
+		document.getElementById('homeTimeouts').innerHTML = data.homeTO;
+		document.getElementById('homeReviews').innerHTML = data.homeOR;
+		break;
+	case 'htToggle':
+		if (data.status == 1) {
+		var halftime = '<div id="htHeader">'+data.htheadertext+'</div>';
+		halftime += '<div id="htclock">'+data.htminutes+'</div>';
+		halftime += '<div id="htAd"><img src="images/htAd1.jpg"></div>';
+		var overlay = document.createElement("div");
+  		overlay.setAttribute("id","overlay");
+  		overlay.setAttribute("class","overlay");
+  		document.body.appendChild(overlay);
+		overlay.innerHTML=halftime;
+		} else if (data.status == 0) {
+		document.body.removeChild(document.getElementById("overlay"));		
+		}
+		break;
+	case 'htUpdate':
+		document.getElementById('htclock').innerHTML = data.htminutes;
+		break;
+	};
+});
+
+
+/* ------- audit line ----------*/
+
+/*
+function refreshClock() {
+    if (jt[3] < 0 ) { t = 0; } else { t = jt[3]; }
+    // The rest of this is copy/pasted from the 
+    // parent window update function. :-(
+    $('#periodHeader').html("PERIOD "+pt[3]);
+    $('#jamHeader').html(labels[t]);
+}
+
+function refreshManual() {
+    $('#homeScore').html(home[0]);
+    $('#guestScore').html(guest[0]);
+    $('#homeJamScore').html(home[1]);
+    $('#guestJamScore').html(guest[1]);
+    $('#homeTimeouts').html(" "+home[4]+home[5]+" ");
+    $('#guestTimeouts').html(" "+guest[4]+guest[5]+" ");
+}
+
+
+function nextAd(adurl) {
+    $('#ad').attr('src',adurl);
+}
+*/
+</script>
+
+<link rel="stylesheet" type="text/css" href="scoreboard.css" />
+<title></title>  
+</head><!-- <body onload="boardRefresh();"> -->
+<div id="master">
+  <div id="header" class="adSpace">
+    <img id="scoreboardHeader" src="images/header.jpg"> 
+  </div>
+
+  <div id="scoreboardFrame">
+
+    <div class="scores" id="home"> 
+      <div class="scoreHeaders" id="homeName">HOME<br>TEAM</div>
+      <div class="scoreNumbers" id="homeScore">0</div> 
+    </div>
+
+    <div id="allClocksFrame">
+      <div class="clock" id="period"> 
+        <div class="clockHeaders" id="periodHeader">PERIOD 1</div>
+        <div class="clockTimes" id="pClock">30:00</div> 
+      </div>
+
+      <div class="clock" id="jam"> 
+        <div class="clockHeaders" id="jamHeader">JAM CLOCK</div>
+        <div class="clockTimes" id="jClock">2:00</div> 
+      </div>
+ 
+      <div class="clock" id="timeOut">         
+		  <span class="timeouts" id="homeTimeouts" style="float: left"> 3</SPAN> 
+		  <span class="timeoutHeaders" id="TOHeader">Timeouts</SPAN> 
+		  <span class="timeouts" id="guestTimeouts" style="float: right"> 3</SPAN>
+      </div>
+      <div class="clock" id="timeOut">         
+		  <span class="timeouts" id="homeReviews" style="float: left"> 1</SPAN> 
+		  <span class="timeoutHeaders" id="ORHeader">Reviews</SPAN> 
+		  <span class="timeouts" id="guestReviews" style="float: right"> 1</SPAN>
+      </div>
+    </div>
+
+    <div class="scores" id="guest"> 
+      <div class="scoreHeaders" id="guestName">GUEST<br>TEAM</div>
+      <div class="scoreNumbers" id="guestScore">0</div> 
+    </div>
+
+    <div id="jamScoreFrame">
+      <span class="jamScores" id="homeJamScore" >00</span> 
+      <span id="jamScoreTitle">JAM <span id="jamNumber">00</span> POINTS</span>
+      <span class="jamScores" id="guestJamScore">00</span> 
+    </div>
+
+  </div>
+
+  <div id="footer">
+    <img id="ad" src="images/ad1.jpg"> 
+  </div>
+
+</div>
+
+
+
+</body></html>

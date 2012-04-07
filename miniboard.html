@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  
+<script language="JavaScript" type="text/javascript">
+
+function boardRefresh() {
+      document.getElementById("homeTO1").style.visibility=opener.ht1;
+      document.getElementById("homeTO2").style.visibility=opener.ht2;
+      document.getElementById("homeTO3").style.visibility=opener.ht3;
+      document.getElementById("homeRO1").style.visibility=opener.hr1;
+      document.getElementById("guestTO1").style.visibility=opener.gt1;
+      document.getElementById("guestTO2").style.visibility=opener.gt2;
+      document.getElementById("guestTO3").style.visibility=opener.gt3;
+      document.getElementById("guestRO1").style.visibility=opener.gr1;
+      document.getElementById('homeJamScore').innerHTML =  opener.homejamscore;
+      document.getElementById('guestJamScore').innerHTML =  opener.guestjamscore;
+      document.getElementById('periodHeader').innerHTML = "PERIOD " + opener.period;
+}
+
+function clockRefresh(psec,pmin,jsec,jmin,jam,jClockLabel,JCColor,PCColor) {
+      document.getElementById('periodTime').innerHTML = pmin + ":" + ((psec<=9) ? "0" + psec : psec);
+      document.getElementById('jamTime').innerHTML = jmin + ":" + ((jsec<=9) ? "0" + jsec : jsec);
+      document.getElementById('jamHeader').innerHTML = jClockLabel;
+      document.getElementById('jamNumber').innerHTML = ((jam<=9) ? "0" + jam : jam)
+      document.getElementById('periodTime').style.color = PCColor;
+      document.getElementById('jamTime').style.color = JCColor;
+      return true;
+}
+
+function showAd(url){
+      document.getElementById('ad').src = url;
+      return true;
+}
+
+function toggle(div_id) {
+	var el = document.getElementById(div_id);
+	if ( el.style.display == 'none' ) {	el.style.display = 'block';}
+	else {el.style.display = 'none';}
+}
+function blanket_size(popUpDivVar) {
+	if (typeof window.innerWidth != 'undefined') {
+		viewportheight = window.innerHeight;
+	} else {
+		viewportheight = document.documentElement.clientHeight;
+	}
+	if ((viewportheight > document.body.parentNode.scrollHeight) && (viewportheight > document.body.parentNode.clientHeight)) {
+		blanket_height = viewportheight;
+	} else {
+		if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
+			blanket_height = document.body.parentNode.clientHeight;
+		} else {
+			blanket_height = document.body.parentNode.scrollHeight;
+		}
+	}
+	var blanket = document.getElementById('blanket');
+	blanket.style.height = blanket_height + 'px';
+	var popUpDiv = document.getElementById(popUpDivVar);
+	popUpDiv_height=blanket_height/2-150;//150 is half popup's height
+	popUpDiv.style.top = popUpDiv_height + 'px';
+}
+function window_pos(popUpDivVar) {
+	if (typeof window.innerWidth != 'undefined') {
+		viewportwidth = window.innerHeight;
+	} else {
+		viewportwidth = document.documentElement.clientHeight;
+	}
+	if ((viewportwidth > document.body.parentNode.scrollWidth) && (viewportwidth > document.body.parentNode.clientWidth)) {
+		window_width = viewportwidth;
+	} else {
+		if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
+			window_width = document.body.parentNode.clientWidth;
+		} else {
+			window_width = document.body.parentNode.scrollWidth;
+		}
+	}
+	var popUpDiv = document.getElementById(popUpDivVar);
+	window_width=window_width/2-150;//150 is half popup's width
+	popUpDiv.style.left = window_width + 'px';
+}
+function popup(windowname) {
+//	blanket_size(windowname);
+//	window_pos(windowname);
+	toggle('blanket');
+	toggle(windowname);		
+}
+
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="miniboard.css" />
+<title></title>  
+</head><body onload="boardRefresh();">
+<div id="master">
+
+  <div id="scoreboardFrame">
+
+    <div id="allClocksFrame">
+      <div class="clock" id="period"> 
+        <div class="clockHeaders" id="periodHeader">PERIOD 1</div>
+        <div class="clockTimes" id="periodTime">30:00</div> 
+      </div>
+
+      <div class="clock" id="jam"> 
+        <div class="clockHeaders" id="jamHeader">JAM CLOCK</div>
+        <div class="clockTimes" id="jamTime">2:00</div> 
+      </div>
+ 
+      <div class="clock" id="timeOut"> 
+        <div class="clockTimes" id="timeoutCount"> 
+    	  <img class="toHIcons" id="homeTO1" src="icons/timeout.jpg">
+          <img class="toHIcons" id="homeTO2" src="icons/timeout.jpg">
+          <img class="toHIcons" id="homeTO3" src="icons/timeout.jpg">
+          <img class="toHIcons" id="homeRO1" src="icons/review.jpg">
+          <img class="toGIcons" id="guestTO1" src="icons/timeout.jpg">
+          <img class="toGIcons" id="guestTO2" src="icons/timeout.jpg">
+          <img class="toGIcons" id="guestTO3" src="icons/timeout.jpg">
+          <img class="toGIcons" id="guestRO1" src="icons/review.jpg">
+        </div>
+      </div>
+    </div>
+
+    <div id="jamScoreFrame">
+      <span class="jamScores" id="homeJamScore" >00</span> 
+      <span id="jamScoreTitle">JAM <span id="jamNumber">00</span> POINTS</span>
+      <span class="jamScores" id="guestJamScore">00</span> 
+    </div>
+
+  </div>
+
+</div>
+
+
+
+</body></html>
